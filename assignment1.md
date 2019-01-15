@@ -1,17 +1,19 @@
 MYSQL ASSIGNMENT - THE CONCEPT: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
 
 1) Topics of Cultural Interest: 
-. What is the performance of a topic, a title, - a media over time, or by volume, or by trends, or by news events?
-. How does the collection change over time?
+- What is the performance of a topic, a title, - a media over time, or by volume, or by trends, or by news events?
+- How does the collection change over time?
 
 2) The Database Organizational Structure
-. What is the classification approach that the library uses
-. What anomalies, errors, outliers, illogical classification methods, etc. may be revealed. 
+- What is the classification approach that the library uses
+- What anomalies, errors, outliers, illogical classification methods, etc. may be revealed. 
 (All databases have these as its impossible to precisely classify all things within a structured system)
 
 3) Data Analytics Query Methods
-. Explore statistical methods or algorithms to retrieve or process data
+- Explore statistical methods or algorithms to retrieve or process data
 
+----------
+(Blade Runner example)
 ----------
 
 DO THE ASSIGNMENT: 
