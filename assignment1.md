@@ -1,6 +1,6 @@
 # MySQL Assignment
 
-*THE CONCEPT*: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
+**THE CONCEPT**: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
 
 1) Topics of Cultural Interest: 
 - What is the performance of a topic, a title, - a media over time, or by volume, or by trends, or by news events?
@@ -16,7 +16,7 @@
 
 ----------
 
-# DO THE ASSIGNMENT:
+## DO THE ASSIGNMENT:
 
 Do a report on your research, and propose what to visualize based on time, or volume of activity. Possibly make a comparison between book(s) and movie(s) and soundtracks (cd)
 
