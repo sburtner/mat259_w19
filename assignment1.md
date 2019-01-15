@@ -11,3 +11,12 @@ MYSQL ASSIGNMENT - THE CONCEPT: In any database, there lies hidden knowledge. Wh
 
 3) Data Analytics Query Methods
 . Explore statistical methods or algorithms to retrieve or process data
+
+----------
+
+DO THE ASSIGNMENT: 
+Do a report on your research, and propose what to visualize based on time, or volume of activity. Possibly make a comparison between book(s) and movie(s) and soundtracks (cd)
+
+Your query may function to process the existing data, or to calculate retrieved information. To create visualizations, you will need to have 4 columns of numeric values, for instance, time-based, or ordered data (itemNumber, dewey, volume, etc.) These will be used for horizontal, vertical, depth positions, and the 4th to define color density of the positioned item.
+
+Once you have all the material - click on "POST REPLY" to this link and add your info to complete the assignment.
