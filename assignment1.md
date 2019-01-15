@@ -1,4 +1,6 @@
-MYSQL ASSIGNMENT - THE CONCEPT: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
+# MySQL Assignment
+
+*THE CONCEPT*: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
 
 1) Topics of Cultural Interest: 
 - What is the performance of a topic, a title, - a media over time, or by volume, or by trends, or by news events?
@@ -13,10 +15,9 @@ MYSQL ASSIGNMENT - THE CONCEPT: In any database, there lies hidden knowledge. Wh
 - Explore statistical methods or algorithms to retrieve or process data
 
 ----------
-(Blade Runner example)
-----------
 
-DO THE ASSIGNMENT: 
+# DO THE ASSIGNMENT:
+
 Do a report on your research, and propose what to visualize based on time, or volume of activity. Possibly make a comparison between book(s) and movie(s) and soundtracks (cd)
 
 Your query may function to process the existing data, or to calculate retrieved information. To create visualizations, you will need to have 4 columns of numeric values, for instance, time-based, or ordered data (itemNumber, dewey, volume, etc.) These will be used for horizontal, vertical, depth positions, and the 4th to define color density of the positioned item.
