@@ -1,16 +1,11 @@
 # Proj 1 - MySQL Assignment | Knowledge Discovery
 ## Susan Burtner
 
-**THE CONCEPT**: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
+**THE CONCEPT (abridged version)**: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
 
 1) **Topics of Cultural Interest**: 
-- What is the performance of a topic, a title, - a media over time, or by volume, or by trends, or by news events?
-- How does the collection change over time?
 
 2) **The Database Organizational Structure**
-- What is the classification approach that the library uses
-- What anomalies, errors, outliers, illogical classification methods, etc. may be revealed. 
-(All databases have these as its impossible to precisely classify all things within a structured system)
 
 3) Data Analytics Query Methods
 - Explore statistical methods or algorithms to retrieve or process data
@@ -32,9 +27,9 @@ Once you have all the material - click on "POST REPLY" to this [link](http://w2.
 # Map Use and Musings at the Seattle Public Library - 2016
 
 ## Research Questions relating to Organizational Structure:
-### RQ1: What maps are available at the Seattle Public Libary (SPL)?
+### RQ1: How many are available at the Seattle Public Libary (SPL)?
 
-***Why am I asking this?*** It would be helpful to first know what maps are available at SPL before knowing which ones are checked out, and before performing any analyses of cultural interest. This will be helpful for later visualizations that require normalization.
+***Why am I asking this?*** It would be helpful to first how many maps are available at SPL before knowing which ones are checked out, and before performing any analyses of cultural interest. This will be helpful for later visualizations that require normalization.
 
 ```sql
 SELECT COUNT(barcode)
@@ -46,9 +41,45 @@ WHERE itemtype LIKE '%map';
 ![results1](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 
-### RQ2: How many map collections does SPL have?
+### RQ2: How many map collections does SPL have and what are they?
 
 ** *Why am I asking this?* ** The map collections can be an indication of the *coverage* of the globe. Collections with more maps may imply increased interest in that particular area, or perhaps, a greater diversity of of map representation. For example, areas with more "things" will have more maps related to each of those "things."
+
+```sql
+SELECT COUNT(DISTINCT collcode)
+FROM spl_2016.inraw
+WHERE itemtype LIKE '%map';
+```
+
+> 8
+
+```sql
+SELECT DISTINCT collcode
+FROM spl_2016.inraw
+WHERE itemtype LIKE '%map';
+```
+| **collcode** |
+|:-------------|
+|cadocpt|
+|camap|
+|camapr|
+|camus|
+|canf|
+|caref|
+|naatlr|
+|nanf|
+
+*Follow-up questions*... what do those collections mean?
+
+We know from [this link](https://www.mat.ucsb.edu/~g.legrady/academic/courses/15w259/d/MetadataDef.pdf) that **collcode**:
+
+> This is a string of characters that encodes several data for each item, including the physical home (aka
+branch), collection type, and collection name.
+
+But it's unclear what the names of the collections actually mean. We may have to do additional exploraiton on SPL's [website](https://www.spl.org/). I'm assuming that "ca" may indicated California, "map" is just that, and "ref" is just that as well, but otherwise, I couldn't find much information on the collection metadata.
+
+
+## RQ3: Do maps have a Dewey class? And if so what are they?
 
 
 ### RQ3: How many of these maps were left 'Uncategorized'?
