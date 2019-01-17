@@ -43,6 +43,7 @@ WHERE itemtype LIKE '%map';
 
 Since the `barcode` value is distinct, we know that there are 287 entries in the database that are designated as "maps."
 
+----------
 
 ### RQ2: How many map collections does SPL have and what are they?
 
@@ -84,6 +85,7 @@ branch), collection type, and collection name.
 
 But it's unclear what the names of the collections actually mean. We may have to do additional exploraiton on SPL's [website](https://www.spl.org/). I'm assuming that "map" is just that, and "ref" is just that as well, but otherwise, I couldn't find much information on the collection metadata, and since the current SPL website is for 2018, I didn't much digging to see what these retroactive designations meant.
 
+----------
 
 ### RQ3: Do maps have a Dewey class? And if so what are they?
 
@@ -171,6 +173,7 @@ ORDER BY deweyClass.deweyClass ASC;
 
 Not sure why that last one has the subject "Children's songs," so maybe this is an error. Regardless, these entries do indeed seem to be maps!
 
+----------
 
 ### RQ4: How many of these maps were left 'Uncategorized'?
 
@@ -186,6 +189,7 @@ WHERE itemtype LIKE '%map' AND
 
 Thirty two out of 287 maps have no `callNumber`, which is essentially the "address" of the item. But how would one find these in the library?
 
+----------
 
 ### RQ5: What subjects do the maps have?
 
@@ -237,6 +241,7 @@ LIMIT 20;
 
 It's interesting that the top "subject" is no subject at all! And most of the rest of the maps are on Washington state or national forests, though the "Topographic maps" could be about anything.
 
+----------
 
 ### RQ6: Which regions of the world are covered by the given maps?
 
