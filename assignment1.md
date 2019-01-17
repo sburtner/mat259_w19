@@ -25,7 +25,7 @@
 
 Do a report on your research, and propose what to visualize based on time, or volume of activity. Possibly make a comparison between book(s) and movie(s) and soundtracks (cd).
 
-Once you have all the material - click on "POST REPLY" to this [link][http://w2.mat.ucsb.edu/forum/viewtopic.php?f=77&t=313] and add your info to complete the assignment.
+Once you have all the material - click on "POST REPLY" to this [link](http://w2.mat.ucsb.edu/forum/viewtopic.php?f=77&t=313) and add your info to complete the assignment.
 
 ----------
 Susan Burtner
