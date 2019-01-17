@@ -26,9 +26,9 @@ Once you have all the material - click on "POST REPLY" to this [link](http://w2.
 # Map Use and Musings at the Seattle Public Library - 2016
 
 ## Research Questions relating to Organizational Structure:
-### RQ1: How many are available at the Seattle Public Libary (SPL)?
+### RQ1: How many maps are available at the Seattle Public Libary (SPL)?
 
-***Why am I asking this?*** It would be helpful to first how many maps are available at SPL before knowing which ones are checked out, and before performing any analyses of cultural interest. This will be helpful for later visualizations that require normalization.
+***Why am I asking this?*** It would be helpful to first know how many maps are available at SPL before knowing which ones are checked out, and before performing any analyses of cultural interest. This will be helpful for later visualizations that require normalization.
 
 ```sql
 SELECT COUNT(barcode)
@@ -38,6 +38,8 @@ WHERE itemtype LIKE '%map';
 > 287
 
 ![results1](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+This raises an interesting thought. I used `barcode` for my query, which implies these are physical maps. But are there digital maps as well? It's not clear we would see this, as this database has tables like `inraw` and `outraw`, which implies that this database contains transactions for physical objects, but perhaps not digital entities (like a digitized map.)
 
 
 ### RQ2: How many map collections does SPL have and what are they?
@@ -82,7 +84,6 @@ But it's unclear what the names of the collections actually mean. We may have to
 
 ** *Why am I asking this?* ** We know that maps are *generally* non-fiction, however, they aren't *read* like texts are. If the maps do have Dewey class values, what are they?
 
-First try...
 
 ```sql
 SELECT inraw.bibNumber, deweyClass.deweyClass, inraw.subj
@@ -91,6 +92,7 @@ WHERE inraw.bibNumber = deweyClass.bibNumber AND
     inraw.itemtype LIKE '%map'
 ORDER BY deweyClass DESC;
 ```
+
 | bibNumber | deweyClass | subj |
 | :-------- | :--------- | :--- |
 | 1848209 | 979 | NULL |
@@ -101,17 +103,17 @@ ORDER BY deweyClass DESC;
 | 1693625 | 911 | NULL |
 | 1693625 | 911 | NULL |
 | 1693625 | 911 | NULL |
-| 1693625 | 911	NULL |
+| 1693625 | 911 | NULL |
 | 558499 | 910 | NULL |
-| 447232 | 784 | NULL |
+| **447232** | **784** | NULL |
 | 2659183 | 355 | NULL |
 | 3031147 | 230	| NULL |
 | 2010269 | 224	| NULL |
-| 2694116 | 188	| NULL |
+| **2694116** | **188** | NULL |
 | 1603624 | 177	| NULL |
-| 1663926 | 173	| NULL |
+| **1663926** | **173**	| NULL |
 
-When we get just the distinct Dewey classes, we get:
+When we grab just the distinct Dewey classes, we get:
 > 979,
 912,
 911,
@@ -124,11 +126,31 @@ When we get just the distinct Dewey classes, we get:
 177,
 173
 
+If we cross reference these classes with the [Dewey classification csv](https://www.mat.ucsb.edu/~g.legrady/academic/courses/19w259/19w259.html) given on the course website, we see that the maps fall under these subjects:
+
+| Dewey class | Description |
+| :---------- | :---------- |
+| **173** | **Ethics of family relationships** |
+| 177 | Ethics of social relations |
+| **188** | **Stoic philosophy** |
+| 224 | Prophetic books of Old Testament|
+| 230 | Christianity |
+| 355 | Military science |
+| **784** | **Instruments & Instrumental ensembles & their music** |
+| 910 | Geography & travel |
+| 911 | Historical geography |
+| 912 | Graphic representations of surface of earth and of extraterrestrial worlds |
+| 979 | Great Basin & Pacific Slope region of United States |
+
+*Follow-up question* (and sanity check)... is this right? Let's pick a few `bibNumbers` (in bold) and check the [SPL website](https://www.spl.org/).
 
 ### RQ3: How many of these maps were left 'Uncategorized'?
 
-** *Why am I asking this?* ** Maps seem like they would be hard to organize. I am curious if most of the maps are physical or digital copies, and if so, how they are organized both in storage and from publically accessible locations in the library.
+** *Why am I asking this?* ** Its apparent from the previous research question that maps seem like they would be hard to organize. I am curious if most of the maps are physical or digital copies, and if so, how they are organized both in storage and from publically accessible locations in the library.
 
+----------
+
+## Research Questions relating to Cultural Interest:
 
 ### RQ4: What subjects do the maps have?
 
@@ -136,6 +158,15 @@ When we get just the distinct Dewey classes, we get:
 
 Another possibility of more maps being created (and this relates to RQ2) is that certain regions of the world are undergoing significant changes in their political boundaries.
 
+What's **not** being classified??
 
-## Research Questions relating to Cultural Interest:
+| Dewey class | Description |
+| :---------- | :---------- |
+| 914 | Geography of & travel in Europe |
+| 915 | Geography of & travel in Asia |
+| 916 | Geography of & travel in Africa |
+| 917 | Geography of & travel in North America |
+| 918 | Geography of & travel in South America |
+| 919 | Geography of & travel in Australasia, Pacific Ocean islands, Atlantic Ocean islands, Arctic islands, Antarctica, & on extraterrestrial worlds |
+
 
