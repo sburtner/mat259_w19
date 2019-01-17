@@ -37,8 +37,6 @@ WHERE itemtype LIKE '%map';
 ```
 > 287
 
-![results1](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
 
 ### RQ2: How many map collections does SPL have and what are they?
 
@@ -143,24 +141,23 @@ If we cross reference these classes with the [Dewey classification csv](https://
 *Follow-up question* (and sanity check)... is this right? Let's pick a few `bibNumbers` (in bold) and check the [SPL website](https://www.spl.org/).
 
 ```sql
-SELECT DISTINCT(deweyClass.deweyClass, deweyClass.bibNumber, title.title, subject.subject)
-FROM spl_2016.title, spl_2016.deweyClass, spl_2016.subject, spl_2016.inraw
-WHERE title.bibNumber = deweyClass.bibNumber AND
-    deweyClass.bibNumber = subject.bibNumber AND
+SELECT deweyClass.deweyClass, deweyClass.bibNumber, title.title, subject.subject
+FROM spl_2016.deweyClass, spl_2016.title, spl_2016.subject, spl_2016.inraw
+WHERE inraw.itemtype LIKE '%map' AND
+    deweyClass.bibNumber = title.bibNumber AND
+    title.bibNumber = subject.bibNumber AND
     subject.bibNumber = inraw.bibNumber AND
-    deweyClass.bibNumber = '1663926' OR
-    deweyClass.bibNumber = '2694116' OR
-    deweyClass.bibNumber = '447232' AND
-    inraw.itemtype LIKE '%map';
+    deweyClass.bibNumber IN ('1663926', '2694116', '447232')
+ORDER BY deweyClass.deweyClass ASC;
 ```
 
 | Dewey class | bibNumber | title | subject |
 | :---------- | :-------- | :---- | :------ | 
-|173 | 1663926 | Ouachita National Forest pocket guide | Ouachita National Forest Ark and Okla |
+| 173 | 1663926 | Ouachita National Forest pocket guide | Ouachita National Forest Ark and Okla |
 | 188 | 2694116 | Shasta Trinity National Forest California	| Outdoor recreation California Shasta National Forest Maps |
-| 188 | 2694116	Shasta Trinity National Forest California | Outdoor recreation California Trinity National Forest Maps |
-| 188 | 2694116	Shasta Trinity National Forest California | Shasta National Forest Calif Maps |
-| 188 | 2694116	Shasta Trinity National Forest California | Trinity National Forest Calif Maps |
+| 188 | 2694116	| Shasta Trinity National Forest California | Outdoor recreation California Trinity National Forest Maps |
+| 188 | 2694116	| Shasta Trinity National Forest California | Shasta National Forest Calif Maps |
+| 188 | 2694116	| Shasta Trinity National Forest California | Trinity National Forest Calif Maps |
 | 784 | 447232 | Sing a song of holidays and seasons home neighborhood and community | Childrens songs |
 
 Not sure why that last one has the subject "Children's songs," so maybe this is an error. Regardless, these entries do indeed seem to be maps!
@@ -182,17 +179,61 @@ WHERE itemtype LIKE '%map' AND
 
 Thirty two out of 287 maps have no `callNumber`, which is essentially the "address" of the item. How would one find these in the library?
 
-----------
-
-## Research Questions relating to Cultural Interest:
 
 ### RQ4: What subjects do the maps have?
 
+** *Why am I asking this?* ** RQ3 makes me wonder what the available maps are even about. We can first figure out how many distinct subjects there are, but it would also be cool to know what the top 20 subjects.
+
+```sql
+SELECT COUNT(DISTINCT subject.subject)
+FROM spl_2016.subject, spl_2016.inraw
+WHERE inraw.itemtype LIKE '%map' AND
+    subject.bibNumber = inraw.bibNumber;
+```
+
+> 277
+
+There 277 different subjects for which the maps are about. What are the top 20 of these?
+
+```sql
+SELECT subject.subject, COUNT(subject.subject) AS total
+FROM spl_2016.subject, spl_2016.inraw
+WHERE inraw.itemtype LIKE '%map' AND
+    subject.bibNumber = inraw.bibNumber
+GROUP BY subject.subject
+ORDER BY total DESC;
+```
+
+| rank | subject | total |
+| :--- | :------ | ----: |
+| 1 | | 75 |
+| 2 | Mount Baker Snoqualmie National Forest Wash Maps | 21 |
+| 3 | Maps | 18 |
+| 4 | Topographic maps | 15 |
+| 5 | Outdoor recreation Washington State Mount Baker Snoqualmie National Forest Maps | 10 |
+| 6 | Endangered species California | 9 |
+| 7 | Endangered species Northwest Pacific | 9 |
+| 8 | Spotted owl | 9 |
+| 9 | Wildlife management California | 9 |
+| 10 | Mount Baker National Forest Wash Maps | 9 |
+| 11 | Wildlife management Northwest Pacific | 9 |
+| 12 | Outdoor recreation Washington State Mount Baker National Forest Maps | 9 |
+| 13 | Outdoor recreation Washington State Snoqualmie National Forest Maps | 9 |
+| 14 | Snoqualmie National Forest Wash Maps | 9 |
+| 15 | Mount Baker Wilderness Wash Maps | 7 |
+| 16 | Noisy Diobsud Wilderness Wash Maps | 7 |
+| 17 | Willamette National Forest Or Maps | 7 |
+| 18 | United States Historical geography Maps | 6 |
+| 19 | Pasayten Wilderness Wash Maps | 5 |
+| 20 | Gifford Pinchot National Forest Wash Maps | 5 |
+
 ### RQ5: Which regions of the world are covered by the given maps?
 
-Another possibility of more maps being created (and this relates to RQ2) is that certain regions of the world are undergoing significant changes in their political boundaries.
+** *Why am I asking this?* **  What is absent from the database is just as important as what's in it. The creation of maps also reflect onoing changes in the political and administrative boundaries of the world. While boundaries may seem stable in this century, they obviously weren't always so, and there are still many regions of the world in which cartographic boundaries are unclear or disputed, and this may either spur more map creation or revision.
 
-What's **not** being classified??
+We can see what's **not** being included in the collection of SPL's maps by looking at RQ4 and revisiting the results from RQ3. When I modify the query in RQ4 to include the Dewey class, I am reminded that MOST map listings do not have a Dewey class (and the top 20 certainly don't.) However, by revisiting the results from RQ3 and comparing them to our list of Dewey classifications, we can get a cursory view of which subjects are not being represented by the library.
+
+The below table shows just some of the Dewey classes that were **not** included when RQ3 was conducted.
 
 | Dewey class | Description |
 | :---------- | :---------- |
@@ -201,11 +242,16 @@ What's **not** being classified??
 | 916 | Geography of & travel in Africa |
 | 917 | Geography of & travel in North America |
 | 918 | Geography of & travel in South America |
-| 919 | Geography of & travel in Australasia, Pacific Ocean islands, Atlantic Ocean islands, Arctic islands, Antarctica, & on extraterrestrial worlds |
+| 919 | Geography of & travel in \*Australasia, Pacific Ocean islands, Atlantic Ocean islands, Arctic islands, Antarctica, & on extraterrestrial worlds |
 
+And basically the rest of the 900's could be encompassed within a map classification.
+
+Also, there are no maps about extraterrestrial worlds? That's too bad...
 
 ----------
 
-## Conclusion
+## Discussion & Conclusion
 
+*Finding* geographic information is tricky. A lot of geographic information systems research is being conducted in geographic information retrieval and search. But it's not as easy as it seems, and visualization is a big part of it. Most physical and natural processes transcend political boundaries, and yet, this is where data collection takes place. Even so, most maps that are available exist at a more micro-level scale with a certai subject in mind, such as recreation (hiking in Washington) or tracking animal populations (mapping endangered species). While the 2016 cataloguing of maps seems decent, there is also tons of room for improvement.
 
+In future work I would like to start looking more at the ** cultural interest** of the available maps. I could what is in the database to what is actually being checked out. I would also love to explore which physical maps are being looked at versus digital copies of maps online. Furthermore, I think **word embeddings** offer a great opporunity to group the textual aspect of maps in a meaningful way, and see if this can somehow help improve the process of geographic information retrieval.
