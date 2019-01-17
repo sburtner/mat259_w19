@@ -3,7 +3,7 @@
 
 **THE CONCEPT (abridged version)**: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
 
-1) **Topics of Cultural Interest**: 
+1) **Topics of Cultural Interest**
 
 2) **The Database Organizational Structure**
 
@@ -38,8 +38,6 @@ WHERE itemtype LIKE '%map';
 > 287
 
 ![results1](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-This raises an interesting thought. I used `barcode` for my query, which implies these are physical maps. But are there digital maps as well? It's not clear we would see this, as this database has tables like `inraw` and `outraw`, which implies that this database contains transactions for physical objects, but perhaps not digital entities (like a digitized map.)
 
 
 ### RQ2: How many map collections does SPL have and what are they?
@@ -77,7 +75,7 @@ We know from [this link](https://www.mat.ucsb.edu/~g.legrady/academic/courses/15
 > This is a string of characters that encodes several data for each item, including the physical home (aka
 branch), collection type, and collection name.
 
-But it's unclear what the names of the collections actually mean. We may have to do additional exploraiton on SPL's [website](https://www.spl.org/). I'm assuming that "ca" may indicated California, "map" is just that, and "ref" is just that as well, but otherwise, I couldn't find much information on the collection metadata.
+But it's unclear what the names of the collections actually mean. We may have to do additional exploraiton on SPL's [website](https://www.spl.org/). I'm assuming that "map" is just that, and "ref" is just that as well, but otherwise, I couldn't find much information on the collection metadata.
 
 
 ## RQ3: Do maps have a Dewey class? And if so what are they?
@@ -144,9 +142,45 @@ If we cross reference these classes with the [Dewey classification csv](https://
 
 *Follow-up question* (and sanity check)... is this right? Let's pick a few `bibNumbers` (in bold) and check the [SPL website](https://www.spl.org/).
 
+```sql
+SELECT DISTINCT(deweyClass.deweyClass, deweyClass.bibNumber, title.title, subject.subject)
+FROM spl_2016.title, spl_2016.deweyClass, spl_2016.subject, spl_2016.inraw
+WHERE title.bibNumber = deweyClass.bibNumber AND
+    deweyClass.bibNumber = subject.bibNumber AND
+    subject.bibNumber = inraw.bibNumber AND
+    deweyClass.bibNumber = '1663926' OR
+    deweyClass.bibNumber = '2694116' OR
+    deweyClass.bibNumber = '447232' AND
+    inraw.itemtype LIKE '%map';
+```
+
+| Dewey class | bibNumber | title | subject |
+| :---------- | :-------- | :---- | :------ | 
+|173 | 1663926 | Ouachita National Forest pocket guide | Ouachita National Forest Ark and Okla |
+| 188 | 2694116 | Shasta Trinity National Forest California	| Outdoor recreation California Shasta National Forest Maps |
+| 188 | 2694116	Shasta Trinity National Forest California | Outdoor recreation California Trinity National Forest Maps |
+| 188 | 2694116	Shasta Trinity National Forest California | Shasta National Forest Calif Maps |
+| 188 | 2694116	Shasta Trinity National Forest California | Trinity National Forest Calif Maps |
+| 784 | 447232 | Sing a song of holidays and seasons home neighborhood and community | Childrens songs |
+
+Not sure why that last one has the subject "Children's songs," so maybe this is an error. Regardless, these entries do indeed seem to be maps!
+
+
 ### RQ3: How many of these maps were left 'Uncategorized'?
 
-** *Why am I asking this?* ** Its apparent from the previous research question that maps seem like they would be hard to organize. I am curious if most of the maps are physical or digital copies, and if so, how they are organized both in storage and from publically accessible locations in the library.
+** *Why am I asking this?* ** Its apparent from the previous research questions that maps seem like they would be hard to organize. I am curious if most of the maps are physical or digital copies, and if so, how they are organized both in storage and from publically accessible locations in the library.
+
+RQ1 in particular raises an interesting thought. I used `barcode` for that query, which implies these are physical maps. But are there digital maps as well? It's not clear we would see this, as this database has tables like `inraw` and `outraw`, which implies that this database contains transactions for physical objects, but perhaps not digital entities (like a digitized map.) Regardless, I would like to see how many maps have no `callNumber`, so I modify my first query.
+
+```sql
+SELECT COUNT(barcode)
+FROM spl_2016.inraw
+WHERE itemtype LIKE '%map' AND
+    callNumber = 'UNCAT';
+```
+> 32
+
+Thirty two out of 287 maps have no `callNumber`, which is essentially the "address" of the item. How would one find these in the library?
 
 ----------
 
@@ -168,5 +202,10 @@ What's **not** being classified??
 | 917 | Geography of & travel in North America |
 | 918 | Geography of & travel in South America |
 | 919 | Geography of & travel in Australasia, Pacific Ocean islands, Atlantic Ocean islands, Arctic islands, Antarctica, & on extraterrestrial worlds |
+
+
+----------
+
+## Conclusion
 
 
