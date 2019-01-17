@@ -1,5 +1,6 @@
 # Proj 1 - MySQL Assignment | Knowledge Discovery
 ### Susan Burtner
+----------
 
 **THE CONCEPT (abridged version, taken from [the MAT 259 course website](http://w2.mat.ucsb.edu/forum/viewtopic.php?f=77&t=313))**: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
 
