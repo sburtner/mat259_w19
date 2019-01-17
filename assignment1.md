@@ -34,20 +34,21 @@ Once you have all the material - click on "POST REPLY" to this [link](http://w2.
 ## Research Questions relating to Organizational Structure:
 ### RQ1: What maps are available at the Seattle Public Libary (SPL)?
 
-** *Why am I asking this?* ** It would be helpful to first know what maps are available at SPL before knowing which ones are checked out and . This will be helpful for later visualizations that require normalization.
+***Why am I asking this?*** It would be helpful to first know what maps are available at SPL before knowing which ones are checked out, and before performing any analyses of cultural interest. This will be helpful for later visualizations that require normalization.
 
 ```sql
 SELECT COUNT(barcode)
 FROM spl_2016.inraw
 WHERE itemtype LIKE '%map';
 ```
+> 287
 
 ![results1](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 
 ### RQ2: How many map collections does SPL have?
 
-** *Why am I asking this?* ** The map collections can be an indication of the *coverage* of the globe. Collections with more maps may imply increased interest in that particular area.
+** *Why am I asking this?* ** The map collections can be an indication of the *coverage* of the globe. Collections with more maps may imply increased interest in that particular area, or perhaps, a greater diversity of of map representation. For example, areas with more "things" will have more maps related to each of those "things."
 
 
 ### RQ3: How many of these maps were left 'Uncategorized'?
@@ -58,6 +59,8 @@ WHERE itemtype LIKE '%map';
 ### RQ4: What subjects do the maps have?
 
 ### RQ5: Which regions of the world are covered by the given maps?
+
+Another possibility of more maps being created (and this relates to RQ2) is that certain regions of the world are undergoing significant changes in their political boundaries.
 
 
 ## Research Questions relating to Cultural Interest:
