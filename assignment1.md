@@ -68,7 +68,7 @@ WHERE itemtype LIKE '%map';
 |naatlr|
 |nanf|
 
-*Follow-up questions*... what do those collections mean?
+*Follow-up question*... what do those collections mean?
 
 We know from [this link](https://www.mat.ucsb.edu/~g.legrady/academic/courses/15w259/d/MetadataDef.pdf) that **collcode**:
 
@@ -110,6 +110,19 @@ ORDER BY deweyClass DESC;
 | 2694116 | 188	| NULL |
 | 1603624 | 177	| NULL |
 | 1663926 | 173	| NULL |
+
+When we get just the distinct Dewey classes, we get:
+> 979
+912
+911
+910
+784
+355
+230
+224
+188
+177
+173
 
 
 ### RQ3: How many of these maps were left 'Uncategorized'?
