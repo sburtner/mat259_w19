@@ -112,16 +112,16 @@ ORDER BY deweyClass DESC;
 | 1663926 | 173	| NULL |
 
 When we get just the distinct Dewey classes, we get:
-> 979
-912
-911
-910
-784
-355
-230
-224
-188
-177
+> 979,
+912,
+911,
+910,
+784,
+355,
+230,
+224,
+188,
+177,
 173
 
 
