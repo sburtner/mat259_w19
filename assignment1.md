@@ -84,7 +84,7 @@ branch), collection type, and collection name.
 But it's unclear what the names of the collections actually mean. We may have to do additional exploraiton on SPL's [website](https://www.spl.org/). I'm assuming that "map" is just that, and "ref" is just that as well, but otherwise, I couldn't find much information on the collection metadata, and since the current SPL website is for 2018, I didn't much digging to see what these retroactive designations meant.
 
 
-## RQ3: Do maps have a Dewey class? And if so what are they?
+### RQ3: Do maps have a Dewey class? And if so what are they?
 
 ** *Why am I asking this?* ** We know that maps are *generally* non-fiction, however, they aren't *read* like texts are. If the maps do have Dewey class values, what are they?
 
@@ -171,7 +171,7 @@ ORDER BY deweyClass.deweyClass ASC;
 Not sure why that last one has the subject "Children's songs," so maybe this is an error. Regardless, these entries do indeed seem to be maps!
 
 
-### RQ3: How many of these maps were left 'Uncategorized'?
+### RQ4: How many of these maps were left 'Uncategorized'?
 
 ** *Why am I asking this?* ** It's apparent from the previous research questions that maps seem like they would be hard to organize. I am curious if most of the maps are physical or digital copies for example, and if so, how they are organized both in storage and from publically accessible locations in the library. RQ1 in particular raises an interesting thought. I used `barcode` for that query, which implies these are physical maps. But are there digital maps as well? It's not clear we would see this, as this database has tables like `inraw` and `outraw`, which implies that this database contains transactions for physical objects, but perhaps not digital entities (like a digitized map.) Regardless, I would like to see how many maps have no `callNumber`, so I modify my first query. The following query helps to see what proportion of maps are easily or (not so easily) categorized.
 
@@ -186,7 +186,7 @@ WHERE itemtype LIKE '%map' AND
 Thirty two out of 287 maps have no `callNumber`, which is essentially the "address" of the item. But how would one find these in the library?
 
 
-### RQ4: What subjects do the maps have?
+### RQ5: What subjects do the maps have?
 
 ** *Why am I asking this?* ** RQ3 makes me wonder what the available maps are even about. We can first figure out how many distinct subjects there are, but it would also be cool to know what are the top 20 subjects.
 
@@ -237,7 +237,7 @@ LIMIT 20;
 It's interesting that the top "subject" is no subject at all! And most of the rest of the maps are on Washington state or national forests, though the "Topographic maps" could be about anything.
 
 
-### RQ5: Which regions of the world are covered by the given maps?
+### RQ6: Which regions of the world are covered by the given maps?
 
 ** *Why am I asking this?* **  What is absent from the database is just as important as what's in it. The creation of maps also reflect ongoing changes in the political and administrative boundaries of the world. While boundaries may seem stable, they obviously weren't always so, and there are still many regions of the world in which cartographic boundaries are unclear or disputed, and this may either spur more map creation or revision.
 
