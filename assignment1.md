@@ -8,7 +8,6 @@
 2) **The Database Organizational Structure**
 
 3) Data Analytics Query Methods
-- Explore statistical methods or algorithms to retrieve or process data
 
 ----------
 
@@ -80,6 +79,37 @@ But it's unclear what the names of the collections actually mean. We may have to
 
 
 ## RQ3: Do maps have a Dewey class? And if so what are they?
+
+** *Why am I asking this?* ** We know that maps are *generally* non-fiction, however, they aren't *read* like texts are. If the maps do have Dewey class values, what are they?
+
+First try...
+
+```sql
+SELECT inraw.bibNumber, deweyClass.deweyClass, inraw.subj
+FROM spl_2016.inraw, spl_2016.deweyClass
+WHERE inraw.bibNumber = deweyClass.bibNumber AND
+    inraw.itemtype LIKE '%map'
+ORDER BY deweyClass DESC;
+```
+| bibNumber | deweyClass | subj |
+| :-------- | :--------- | :--- |
+| 1848209 | 979 | NULL |
+| 1757400 | 912 | NULL |
+| 1757400 | 912	| NULL |
+| 1693625 | 911 | NULL |
+| 1693625 | 911 | NULL |
+| 1693625 | 911 | NULL |
+| 1693625 | 911 | NULL |
+| 1693625 | 911 | NULL |
+| 1693625 | 911	NULL |
+| 558499 | 910 | NULL |
+| 447232 | 784 | NULL |
+| 2659183 | 355 | NULL |
+| 3031147 | 230	| NULL |
+| 2010269 | 224	| NULL |
+| 2694116 | 188	| NULL |
+| 1603624 | 177	| NULL |
+| 1663926 | 173	| NULL |
 
 
 ### RQ3: How many of these maps were left 'Uncategorized'?
