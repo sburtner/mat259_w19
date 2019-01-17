@@ -1,11 +1,11 @@
 # Proj 1 - MySQL Assignment | Knowledge Discovery
 ## Susan Burtner
 
-**THE CONCEPT (abridged version)**: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
+**THE CONCEPT (abridged version, taken from [the MAT 259 course website](http://w2.mat.ucsb.edu/forum/viewtopic.php?f=77&t=313))**: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
 
-1) **Topics of Cultural Interest**
+1) Topics of Cultural Interest
 
-2) **The Database Organizational Structure**
+2) **The Database Organizational Structure** <- *what I'll be looking at*
 
 3) Data Analytics Query Methods
 
@@ -13,8 +13,8 @@
 
 ## GETTING THE DATA:
 
-- Use the MySQL Workbench to write a query by which to retrieve the data from the SPL database.
-- Use the spl_2016 database which gets updated daily.
+- Use the MySQL Workbench to write a query by which to retrieve the data from the SPL database
+- Use the **spl_2016 database** which gets updated daily.
 
 ## DO THE ASSIGNMENT:
 
@@ -23,10 +23,13 @@ Do a report on your research, and propose what to visualize based on time, or vo
 Once you have all the material - click on "POST REPLY" to this [link](http://w2.mat.ucsb.edu/forum/viewtopic.php?f=77&t=313) and add your info to complete the assignment.
 
 ----------
+
 # Map Use and Musings at the Seattle Public Library - 2016
 
+I'm interested in knowing how maps are catalogued at the Seattle Public Library (SPL) in 2016. Maps create an interesting challenge for library and database organizers, becuase they exist beyond just the medium of text, but as images or collections of vector-based features. My research questions try to explore how the library organizes maps, and the structure by which they are made accessible.
+
 ## Research Questions relating to Organizational Structure:
-### RQ1: How many maps are available at the Seattle Public Libary (SPL)?
+### RQ1: How many maps are available at SPL?
 
 ***Why am I asking this?*** It would be helpful to first know how many maps are available at SPL before knowing which ones are checked out, and before performing any analyses of cultural interest. This will be helpful for later visualizations that require normalization.
 
@@ -37,10 +40,12 @@ WHERE itemtype LIKE '%map';
 ```
 > 287
 
+Since the `barcode` value is distinct, we know that there are 287 entries in the database that are designated as "maps."
+
 
 ### RQ2: How many map collections does SPL have and what are they?
 
-** *Why am I asking this?* ** The map collections can be an indication of the *coverage* of the globe. Collections with more maps may imply increased interest in that particular area, or perhaps, a greater diversity of of map representation. For example, areas with more "things" will have more maps related to each of those "things."
+** *Why am I asking this?* ** The map collections can be an indication of the *coverage* of the globe by subject area. Collections with more maps may imply increased interest in that particular area, or perhaps, a greater diversity of map representation. For example, areas with more "things" will have more maps related to each of those "things," such hiking, camping, animal activity, etc.
 
 ```sql
 SELECT COUNT(DISTINCT collcode)
@@ -50,11 +55,14 @@ WHERE itemtype LIKE '%map';
 
 > 8
 
+There are 8 different types of map collections at SPL. What are they?
+
 ```sql
 SELECT DISTINCT collcode
 FROM spl_2016.inraw
 WHERE itemtype LIKE '%map';
 ```
+
 | **collcode** |
 |:-------------|
 |cadocpt|
@@ -66,14 +74,14 @@ WHERE itemtype LIKE '%map';
 |naatlr|
 |nanf|
 
-*Follow-up question*... what do those collections mean?
+*Follow-up question*... what do these collection designations mean?
 
-We know from [this link](https://www.mat.ucsb.edu/~g.legrady/academic/courses/15w259/d/MetadataDef.pdf) that **collcode**:
+We know from [this link on the course website](https://www.mat.ucsb.edu/~g.legrady/academic/courses/15w259/d/MetadataDef.pdf) that **collcode**:
 
 > This is a string of characters that encodes several data for each item, including the physical home (aka
 branch), collection type, and collection name.
 
-But it's unclear what the names of the collections actually mean. We may have to do additional exploraiton on SPL's [website](https://www.spl.org/). I'm assuming that "map" is just that, and "ref" is just that as well, but otherwise, I couldn't find much information on the collection metadata.
+But it's unclear what the names of the collections actually mean. We may have to do additional exploraiton on SPL's [website](https://www.spl.org/). I'm assuming that "map" is just that, and "ref" is just that as well, but otherwise, I couldn't find much information on the collection metadata, and since the current SPL website is for 2018, I didn't much digging to see what these retroactive designations meant.
 
 
 ## RQ3: Do maps have a Dewey class? And if so what are they?
@@ -138,7 +146,7 @@ If we cross reference these classes with the [Dewey classification csv](https://
 | 912 | Graphic representations of surface of earth and of extraterrestrial worlds |
 | 979 | Great Basin & Pacific Slope region of United States |
 
-*Follow-up question* (and sanity check)... is this right? Let's pick a few `bibNumbers` (in bold) and check the [SPL website](https://www.spl.org/).
+*Follow-up question* (and sanity check)... is this right? Let's pick a few `bibNumbers` (in bold) and check.
 
 ```sql
 SELECT deweyClass.deweyClass, deweyClass.bibNumber, title.title, subject.subject
@@ -165,9 +173,7 @@ Not sure why that last one has the subject "Children's songs," so maybe this is 
 
 ### RQ3: How many of these maps were left 'Uncategorized'?
 
-** *Why am I asking this?* ** Its apparent from the previous research questions that maps seem like they would be hard to organize. I am curious if most of the maps are physical or digital copies, and if so, how they are organized both in storage and from publically accessible locations in the library.
-
-RQ1 in particular raises an interesting thought. I used `barcode` for that query, which implies these are physical maps. But are there digital maps as well? It's not clear we would see this, as this database has tables like `inraw` and `outraw`, which implies that this database contains transactions for physical objects, but perhaps not digital entities (like a digitized map.) Regardless, I would like to see how many maps have no `callNumber`, so I modify my first query.
+** *Why am I asking this?* ** It's apparent from the previous research questions that maps seem like they would be hard to organize. I am curious if most of the maps are physical or digital copies for example, and if so, how they are organized both in storage and from publically accessible locations in the library. RQ1 in particular raises an interesting thought. I used `barcode` for that query, which implies these are physical maps. But are there digital maps as well? It's not clear we would see this, as this database has tables like `inraw` and `outraw`, which implies that this database contains transactions for physical objects, but perhaps not digital entities (like a digitized map.) Regardless, I would like to see how many maps have no `callNumber`, so I modify my first query. The following query helps to see what proportion of maps are easily or (not so easily) categorized.
 
 ```sql
 SELECT COUNT(barcode)
@@ -177,12 +183,12 @@ WHERE itemtype LIKE '%map' AND
 ```
 > 32
 
-Thirty two out of 287 maps have no `callNumber`, which is essentially the "address" of the item. How would one find these in the library?
+Thirty two out of 287 maps have no `callNumber`, which is essentially the "address" of the item. But how would one find these in the library?
 
 
 ### RQ4: What subjects do the maps have?
 
-** *Why am I asking this?* ** RQ3 makes me wonder what the available maps are even about. We can first figure out how many distinct subjects there are, but it would also be cool to know what the top 20 subjects.
+** *Why am I asking this?* ** RQ3 makes me wonder what the available maps are even about. We can first figure out how many distinct subjects there are, but it would also be cool to know what are the top 20 subjects.
 
 ```sql
 SELECT COUNT(DISTINCT subject.subject)
@@ -201,7 +207,8 @@ FROM spl_2016.subject, spl_2016.inraw
 WHERE inraw.itemtype LIKE '%map' AND
     subject.bibNumber = inraw.bibNumber
 GROUP BY subject.subject
-ORDER BY total DESC;
+ORDER BY total DESC
+LIMIT 20;
 ```
 
 | rank | subject | total |
@@ -227,9 +234,12 @@ ORDER BY total DESC;
 | 19 | Pasayten Wilderness Wash Maps | 5 |
 | 20 | Gifford Pinchot National Forest Wash Maps | 5 |
 
+It's interesting that the top "subject" is no subject at all! And most of the rest of the maps are on Washington state or national forests, though the "Topographic maps" could be about anything.
+
+
 ### RQ5: Which regions of the world are covered by the given maps?
 
-** *Why am I asking this?* **  What is absent from the database is just as important as what's in it. The creation of maps also reflect onoing changes in the political and administrative boundaries of the world. While boundaries may seem stable in this century, they obviously weren't always so, and there are still many regions of the world in which cartographic boundaries are unclear or disputed, and this may either spur more map creation or revision.
+** *Why am I asking this?* **  What is absent from the database is just as important as what's in it. The creation of maps also reflect ongoing changes in the political and administrative boundaries of the world. While boundaries may seem stable, they obviously weren't always so, and there are still many regions of the world in which cartographic boundaries are unclear or disputed, and this may either spur more map creation or revision.
 
 We can see what's **not** being included in the collection of SPL's maps by looking at RQ4 and revisiting the results from RQ3. When I modify the query in RQ4 to include the Dewey class, I am reminded that MOST map listings do not have a Dewey class (and the top 20 certainly don't.) However, by revisiting the results from RQ3 and comparing them to our list of Dewey classifications, we can get a cursory view of which subjects are not being represented by the library.
 
@@ -252,6 +262,6 @@ Also, there are no maps about extraterrestrial worlds? That's too bad...
 
 ## Discussion & Conclusion
 
-*Finding* geographic information is tricky. A lot of geographic information systems research is being conducted in geographic information retrieval and search. But it's not as easy as it seems, and visualization is a big part of it. Most physical and natural processes transcend political boundaries, and yet, this is where data collection takes place. Even so, most maps that are available exist at a more micro-level scale with a certai subject in mind, such as recreation (hiking in Washington) or tracking animal populations (mapping endangered species). While the 2016 cataloguing of maps seems decent, there is also tons of room for improvement.
+Finding geographic information is tricky. A lot of geographic information systems (GIS) research is being conducted in geographic information retrieval and search. While it's not as easy as it seems, visualization is increasingly being used to overcome some of the challenges of finding, exploring and analyzing geographic data. Most physical and natural processes transcend political boundaries, and yet, this is where most data collection takes place. Even so, most maps that are available exist at a sub-administrative scale with a certain subject in mind, such as recreation (hiking in Washington) or tracking animal populations (mapping endangered species). While the 2016 SPL cataloguing of maps seems decent, there is room for improvement (an opportunity for GIS practitioners!)
 
-In future work I would like to start looking more at the ** cultural interest** of the available maps. I could what is in the database to what is actually being checked out. I would also love to explore which physical maps are being looked at versus digital copies of maps online. Furthermore, I think **word embeddings** offer a great opporunity to group the textual aspect of maps in a meaningful way, and see if this can somehow help improve the process of geographic information retrieval.
+In future work I would like to start looking more at the ** cultural interest** of the available maps. I could compare what is in the database to what is actually being checked out. I would also love to explore which physical maps are being looked at versus digital copies of maps online. Furthermore, I think **word embeddings** offer a great opporunity to group the textual aspect of maps in a meaningful way, and see if this can somehow help improve the process of geographic information retrieval.
