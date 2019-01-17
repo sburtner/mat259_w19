@@ -1,4 +1,5 @@
 # Proj 1 - MySQL Assignment | Knowledge Discovery
+## Susan Burtner
 
 **THE CONCEPT**: In any database, there lies hidden knowledge. What does a database contain, and what can MySQL queries reveal? Your first assignment is to find something of interest based on your own cultural / knowledge interests. Here are some options: 
 
@@ -28,7 +29,6 @@ Do a report on your research, and propose what to visualize based on time, or vo
 Once you have all the material - click on "POST REPLY" to this [link](http://w2.mat.ucsb.edu/forum/viewtopic.php?f=77&t=313) and add your info to complete the assignment.
 
 ----------
-Susan Burtner
 # Map Use and Musings at the Seattle Public Library - 2016
 
 ## Research Questions relating to Organizational Structure:
