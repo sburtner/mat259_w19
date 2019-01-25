@@ -1,4 +1,4 @@
-# Assignment 2 - MySQL Assignment | Knowledge Discovery
+# Proj 2 - 2D Visualization
 ### Susan Burtner
 ----------
 
