@@ -8,7 +8,7 @@ Create a network where nodes represent subjects and titles of maps and edges rep
 
 ## MySQL queries
 
-### 'Query #1'
+### Query
 
 ```sql
 USE spl_2016;
