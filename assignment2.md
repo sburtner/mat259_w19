@@ -53,7 +53,6 @@ ORDER BY numberOfTitlesInSubject DESC;
 
 | ![sketch1](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/sketch1.jpg) |
 |:--:|
-| ![sketch1](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/sketch1.jpg) |
 | *The first sketch of my idea for Assignment \#2.* |
 
 ## Final results & analysis
