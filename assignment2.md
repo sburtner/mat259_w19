@@ -38,7 +38,7 @@ ORDER BY numberOfTitlesInSubject DESC;
 | Outdoor recreation Oregon Maps | 3 | camap |
 | Wildlife management California | 3 | canf |
 | Wildlife management Northwest Pacific | 3 | canf |
-| Olympic National Forest Wash Maps	3 | camap |
+| Olympic National Forest Wash Maps | 3 | camap |
 | Outdoor recreation Washington State Mount Baker Snoqualmie National Forest Maps | 3 | camap
 | Olympic National Park Wash Maps | 3 | camap |
 | Endangered species California | 3 | canf |
