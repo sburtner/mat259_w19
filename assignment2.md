@@ -11,19 +11,18 @@ Create a network where nodes represent subjects and titles of maps and edges rep
 ### Query \#1
 
 ```sql
-USE spl_2016;
-
-SELECT `subject`, COUNT(title.title) AS numberOfTitlesInSubject, #COUNT(outraw.itemNumber) AS numberOfCheckouts,
-    collectionCode.collectionCode
+SELECT `subject`, COUNT(title.title) AS numberOfTitlesInSubject, collectionCode.collectionCode#,
+    #COUNT(outraw.itemNumber) AS numberOfCheckouts, 
 FROM title, `subject`, itemType, itemToBib, collectionCode#, outrraw
 WHERE itemType.itemtype LIKE '%acmap' AND
     collectionCode.itemNumber = itemType.itemNumber AND
     itemType.itemNumber = itemToBib.itemNumber AND
     itemToBib.bibNumber = subject.bibNumber AND
-    subject.bibNumber = title.bibNumber# AND
+    subject.bibNumber = title.bibNumber
     #title.bibNumber = outraw.bibNumber
 GROUP BY `subject`, collectionCode
-ORDER BY numberOfTitlesInSubject DESC;
+ORDER BY numberOfTitlesInSubject DESC
+LIMIT 20;
 ```
 ### Output
 
