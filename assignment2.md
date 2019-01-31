@@ -58,6 +58,28 @@ LIMIT 20;
 
 ### Work-in-progress screenshots
 
-![sketch1](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/sketch1.JPG)
+| ![error1](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error1.png) |
+|:--:|
+| *Placing nodes randomly on the screen.* |
+
+| ![error2](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error2.png) |
+|:--:|
+| *Trying to place nodes on a circle.* |
+
+| ![error3](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error3.png) |
+|:--:|
+| *Trying to get more meaningful sizes and colors.* |
+
+| ![error4](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error3.png) |
+|:--:|
+| *Getting very close to the final product.* |
+
 
 ## Final results & analysis
+| ![final](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/final.png) |
+|:--:|
+| *The final product (so far.* |
+
+This 2D visualization can tell us about how map items are often grouped together by subject. For example, if you look at "Spotted Owl," you can see that it is in the same collection as subjects concerning "wildlife management, California," "wildlife management Northwest Pacific," "Endangered species California," and "Endangered species Northwest Pacific." It is interesting to note that maps with no subject have the most titles in them, followed by topographic maps. It also seems like the more specific the map, such as "Peru maps" and "Carson National Forest Maps," the less likely it is to be a part of a collection.
+
+Overall I'm happy with how the visualization turned out. The most difficult part was putting the labels on the graph such that they were close to the nodes, but offset by the width of the node, and this changes according to whichever quadrant you are in (if you think in terms of the "top-left" quadrant, "bottom-right," etc.) In the future, I would like to add an action, in particular, if you move your mouse over a node, it highlights which edges and nodes it is connected to.
