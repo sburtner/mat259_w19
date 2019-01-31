@@ -54,7 +54,7 @@ LIMIT 20;
 
 | ![sketch1](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/sketch1.JPG) |
 |:--:|
-| *The first sketch of my idea for Assignment \#2.* |
+| *The first sketch of my idea for Assignment \#2. While I wanted to do `deweyClass` originally, there were so few maps with Dewey classifications. I went with the `collectionCode` instead.* |
 
 ### Work-in-progress screenshots
 
