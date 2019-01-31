@@ -72,13 +72,13 @@ LIMIT 20;
 
 | ![error4](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error4.png) |
 |:--:|
-| *Rotating the nodes, and getting very close to the final product.* |
+| *Normalizing the size of the nodes using `log`.* |
 
 
 ## Final results & analysis
 | ![final](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/final.png) |
 |:--:|
-| *The final product (so far.)* |
+| *The final product (so far.) I rotated the nodes, modified the colors, and added labels and text.* |
 
 This 2D visualization can tell us about how map items are often grouped together by subject. For example, if you look at "Spotted Owl," you can see that it is in the same collection as subjects concerning "wildlife management, California," "wildlife management Northwest Pacific," "Endangered species California," and "Endangered species Northwest Pacific." It is interesting to note that maps with no subject have the most titles in them, followed by topographic maps. It also seems like the more specific the map, such as "Peru maps" and "Carson National Forest Maps," the less likely it is to be a part of a collection.
 
