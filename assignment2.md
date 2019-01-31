@@ -64,7 +64,7 @@ LIMIT 20;
 
 | ![error2](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error2.png) |
 |:--:|
-| *Trying to place nodes on a circle.* |
+| *Trying to place nodes on a circle. My error was that I was only comparing each node value to the next one, when I needed to compare it to every other one.* |
 
 | ![error3](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error3.png) |
 |:--:|
