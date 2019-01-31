@@ -4,11 +4,11 @@
 
 ## Concept description
 
-Create a network where nodes represent subjects and titles of maps and edges represent whether the subjects are in the same collection. If there is time, I would also like to make the size of the nodes correspond to the number of checkouts (by subject and by title.)  
+Create a network where nodes represent subjects of maps and edges represent whether the subjects are in the same collection. The size of the nodes correspond to the number of titles in that subject. While I have used the shared attributed of `collectionCode` for this visualization, you could use something like `deweyClass` as well.
 
 ## MySQL queries
 
-### Query \#1
+### Query
 
 ```sql
 SELECT `subject`, COUNT(title.title) AS numberOfTitlesInSubject, collectionCode.collectionCode#,
@@ -70,15 +70,15 @@ LIMIT 20;
 |:--:|
 | *Trying to get more meaningful sizes and colors.* |
 
-| ![error4](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error3.png) |
+| ![error4](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/error4.png) |
 |:--:|
-| *Getting very close to the final product.* |
+| *Rotating the nodes, and getting very close to the final product.* |
 
 
 ## Final results & analysis
 | ![final](https://raw.githubusercontent.com/sburtner/mat259_w19/master/images/final.png) |
 |:--:|
-| *The final product (so far.* |
+| *The final product (so far.)* |
 
 This 2D visualization can tell us about how map items are often grouped together by subject. For example, if you look at "Spotted Owl," you can see that it is in the same collection as subjects concerning "wildlife management, California," "wildlife management Northwest Pacific," "Endangered species California," and "Endangered species Northwest Pacific." It is interesting to note that maps with no subject have the most titles in them, followed by topographic maps. It also seems like the more specific the map, such as "Peru maps" and "Carson National Forest Maps," the less likely it is to be a part of a collection.
 
